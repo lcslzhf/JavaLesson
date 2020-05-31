@@ -54,7 +54,7 @@ public class DefaultSqlSession implements SqlSession {
 
                 String statementId = className+"."+methodName;
                 SqlOperationEnum sqlOperationEnum = configuration.getMappedStatementMap().get(statementId).getSqlOperationEnum();
-
+                //More efficient than if else
                 switch(sqlOperationEnum) {
                     case INSERT:
                         return insert(statementId,args);

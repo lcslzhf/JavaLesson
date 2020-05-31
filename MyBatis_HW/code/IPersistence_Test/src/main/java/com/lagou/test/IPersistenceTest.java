@@ -20,45 +20,69 @@ public class IPersistenceTest {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsSteam);
         return sqlSessionFactory.openSession();
     }
-
-
     @Test
-    public void test1_insert() throws Exception {
+    public void test0_selectCheck() throws Exception {
         SqlSession sqlSession = getSession();
+        IUserDao userDao = sqlSession.getMapper(IUserDao.class);
+        List<User> users = userDao.findAll();
+        for (User user1 : users) {
+            System.out.println(user1);
+        }
 
-        //调用
+
+    }
+    @Test
+    public void test1_selecConditionCheck() throws Exception {
+        SqlSession sqlSession = getSession();
+        IUserDao userDao = sqlSession.getMapper(IUserDao.class);
         User user = new User();
-        user.setId(7);
+        user.setId(1);
         user.setUsername("wuwuwuwu77777");
+        User users = userDao.findByCondition(user);
+        System.out.println(users);
 
-
+    }
+    @Test
+    public void test2_insert() throws Exception {
+        SqlSession sqlSession = getSession();
+        User user = new User();
+        user.setId(2);
+        user.setUsername("wuwuwuwu2");
         IUserDao userDao = sqlSession.getMapper(IUserDao.class);
 
         userDao.insert(user);
     }
 
     @Test
-    public void test2_update() throws Exception {
+    public void test3_update() throws Exception {
 
         SqlSession sqlSession = getSession();
-
-        //调用
         User user = new User();
-        user.setId(3);
-        user.setUsername("update3");
+        user.setId(2);
+        user.setUsername("update2");
         IUserDao userDao = sqlSession.getMapper(IUserDao.class);
         userDao.update(user);
     }
 
 
     @Test
-    public void test3_delete() throws Exception {
+    public void test4_delete() throws Exception {
         SqlSession sqlSession = getSession();
-
         User user = new User();
         user.setId(2);
         IUserDao userDao = sqlSession.getMapper(IUserDao.class);
         userDao.delete(user);
+
+    }
+    @Test
+    public void test5_selectResultCheck() throws Exception {
+        SqlSession sqlSession = getSession();
+        IUserDao userDao = sqlSession.getMapper(IUserDao.class);
+        List<User> users = userDao.findAll();
+        for (User user1 : users) {
+            System.out.println(user1);
+        }
+
 
     }
 
