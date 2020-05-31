@@ -1,2 +1,0 @@
-# JavaLesson
-Learn Knowledge
