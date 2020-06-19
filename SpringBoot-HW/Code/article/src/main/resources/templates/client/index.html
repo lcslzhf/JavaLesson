@@ -3,6 +3,21 @@
 <!-- 载入文章头部页面，位置在/client文件夹下的header模板页面，模板名称th:fragment为header -->
 <div th:replace="/client/header::header(null,null)" />
 <body>
+<script src="jquery.js"></script>
+<style type="text/css">
+    .deo1 ul{
+        height:20px;
+    }
+    .deo1 ul li{
+        float:left;
+        list-style-type:none;
+    }
+</style>
+<script>
+    $(function(){
+
+    });
+</script>
 <div class="am-g am-g-fixed blog-fixed index-page">
     <div class="am-u-md-8 am-u-sm-12">
 
@@ -30,9 +45,10 @@
                 </div>
             </article>
         </div>
-        <div class="modal-footer no-margin-top">
+
+        <div class="deo1">
             <ul class="pagination pull-right no-margin">
-                <li>
+                <li >
         <a th:href="'/index?pageNum=0'">首页</a>
                 </li>
                 <li th:if="${page.hasPrevious()}">
@@ -40,8 +56,7 @@
                 </li>
 
         <li th:each="page:${pageNum}">
-
-            <a style="float: left;margin-left: 10px" th:href="'/index?pageNum='+${page}">[[${page+1}]]</a>
+            <a th:href="'/index?pageNum='+${page}">[[${page+1}]]</a>
         </li>
                 <li th:if="${page.hasNext()}">
                     <a th:href="'/index?pageNum=' + ${page.nextPageable().getPageNumber()}" th:text="下一页"></a>
@@ -75,6 +90,7 @@
     </div>
 
 </div>
+
 </body>
 <!-- 载入文章尾部页面，位置在/client文件夹下的footer模板页面，模板名称th:fragment为footer -->
 <div th:replace="/client/footer::footer" />
