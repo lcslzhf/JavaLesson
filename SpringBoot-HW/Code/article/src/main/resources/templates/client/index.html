@@ -35,12 +35,18 @@
                 <li>
         <a th:href="'/index?pageNum=0'">首页</a>
                 </li>
-                <li>
-        <div th:each="page:${pageNum}">
+                <li th:if="${page.hasPrevious()}">
+                    <a th:href="'/index?pageNum=' + ${page.previousPageable().getPageNumber()}" th:text="上一页"></a>
+                </li>
+
+        <li th:each="page:${pageNum}">
 
             <a style="float: left;margin-left: 10px" th:href="'/index?pageNum='+${page}">[[${page+1}]]</a>
+        </li>
+                <li th:if="${page.hasNext()}">
+                    <a th:href="'/index?pageNum=' + ${page.nextPageable().getPageNumber()}" th:text="下一页"></a>
+                </li>
 
-        </div>
                 </li>
                 <li>
         <a th:href="'/index?pageNum=' + ${page.getTotalPages() - 1}">尾页</a>
